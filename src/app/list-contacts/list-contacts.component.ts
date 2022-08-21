@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-export type Contacts = {
+export type Contact = {
   id: string;
   name: string;
   handle: string;
@@ -9,12 +9,13 @@ export type Contacts = {
 
 @Component({
   selector: 'app-list-contacts',
-  inputs: ['contacts'],
+  inputs: ['contacts', 'onDeleteContact'],
   templateUrl: './list-contacts.component.html',
   styleUrls: ['./list-contacts.component.css'],
 })
 export class ListContactsComponent implements OnInit {
-  contacts: Contacts[] | null = null;
+  contacts: Contact[] | null = null;
+  onDeleteContact: (contact: Contact) => void | null;
   constructor() {}
 
   ngOnInit(): void {

@@ -10,6 +10,8 @@
         <p>@{{ contact.handle }}</p>
       </div>
     </div>
-    <button class="contact-remove">Remove</button>
+    <button class="contact-remove" (click)="onDeleteContact(contact)">
+      Remove
+    </button>
   </li>
 </ol>
