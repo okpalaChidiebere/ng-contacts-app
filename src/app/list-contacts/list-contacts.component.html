@@ -1,0 +1,15 @@
+<ol class="contact-list" *ngFor="let contact of contacts">
+  <li class="contact-list-item">
+    <div style="display: flex">
+      <div
+        class="contact-avatar"
+        [ngStyle]="{ backgroundImage: 'url(' + contact.avatarURL + ')' }"
+      ></div>
+      <div className="contact-details">
+        <p>{{ contact.name }}</p>
+        <p>@{{ contact.handle }}</p>
+      </div>
+    </div>
+    <button class="contact-remove">Remove</button>
+  </li>
+</ol>
