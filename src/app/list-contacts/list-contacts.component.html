@@ -1,17 +1,37 @@
-<ol class="contact-list" *ngFor="let contact of contacts">
-  <li class="contact-list-item">
-    <div style="display: flex">
-      <div
-        class="contact-avatar"
-        [ngStyle]="{ backgroundImage: 'url(' + contact.avatarURL + ')' }"
-      ></div>
-      <div className="contact-details">
-        <p>{{ contact.name }}</p>
-        <p>@{{ contact.handle }}</p>
+<div class="list-contacts">
+  <div class="list-contacts-top">
+    <input
+      class="search-contacts"
+      type="text"
+      placeholder="Search Contacts"
+      [(ngModel)]="query"
+      (ngModelChange)="updateQueryResult()"
+    />
+  </div>
+  <div
+    class="showing-contacts"
+    *ngIf="showingContacts.length !== contacts.length"
+  >
+    <span
+      >Now showing {{ showingContacts.length }} of {{ contacts.length }}</span
+    >
+    <button (click)="clearQuery()">Show all</button>
+  </div>
+  <ol class="contact-list" *ngFor="let contact of showingContacts">
+    <li class="contact-list-item">
+      <div style="display: flex">
+        <div
+          class="contact-avatar"
+          [ngStyle]="{ backgroundImage: 'url(' + contact.avatarURL + ')' }"
+        ></div>
+        <div className="contact-details">
+          <p>{{ contact.name }}</p>
+          <p>@{{ contact.handle }}</p>
+        </div>
       </div>
-    </div>
-    <button class="contact-remove" (click)="onDeleteContact(contact)">
-      Remove
-    </button>
-  </li>
-</ol>
+      <button class="contact-remove" (click)="onDeleteContact(contact)">
+        Remove
+      </button>
+    </li>
+  </ol>
+</div>
