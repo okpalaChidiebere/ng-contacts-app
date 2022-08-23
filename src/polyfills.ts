@@ -45,9 +45,16 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js';  // Included with Angular CLI.
-
+import 'zone.js'; // Included with Angular CLI.
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+/**
+ * This allows us to use the process.env variable on our angular app
+ * @see https://stackoverflow.com/questions/50313745/angular-6-process-is-not-defined-when-trying-to-serve-application
+ * @see https://stackoverflow.com/questions/53529521/typescript-error-cannot-find-name-process
+ */
+(window as any).process = {
+  env: { DEBUG: undefined },
+};

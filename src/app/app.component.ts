@@ -1,36 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Contact } from './list-contacts/list-contacts.component';
+import * as ContactsAPI from '../utils/ContactsAPI';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   /**
    * Having the contacts inside of angular allows us to hook into an
    * angular state for our UI to be able to reflect the state changes
    */
-  contacts: Contact[] | null = [
-    {
-      id: 'karen',
-      name: 'Karen Isgrigg',
-      handle: 'karen_isgrigg',
-      avatarURL: 'http://localhost:5001/karen.jpg',
-    },
-    {
-      id: 'richard',
-      name: 'Richard Kalehoff',
-      handle: 'richardkalehoff',
-      avatarURL: 'http://localhost:5001/richard.jpg',
-    },
-    {
-      id: 'tyler',
-      name: 'Tyler McGinnis',
-      handle: 'tylermcginnis',
-      avatarURL: 'http://localhost:5001/tyler.jpg',
-    },
-  ];
+  contacts: Contact[] = [];
+
+  //runs after the components mounts
+  ngOnInit(): void {
+    /**
+     * fetch the contacts from the remove server after the component mounts
+     * which updates the local state, then updates the UI
+     */
+    ContactsAPI.getAll().then((contacts) => {
+      this.contacts = contacts;
+    });
+  }
 
   /** The contacts data we want to update lives here.
    * So it makes sense that the method to modify the contacts list
@@ -45,5 +38,8 @@ export class AppComponent {
     this.contacts = this.contacts.filter((c) => {
       return c.id !== contact.id;
     });
+
+    //remove the contact from the server as well
+    ContactsAPI.remove(contact);
   };
 }
