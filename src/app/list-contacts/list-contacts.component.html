@@ -7,6 +7,7 @@
       [(ngModel)]="query"
       (ngModelChange)="updateQueryResult()"
     />
+    <a routerLink="/create" class="add-contact">Add Contact</a>
   </div>
   <div
     class="showing-contacts"
@@ -29,7 +30,7 @@
           <p>@{{ contact.handle }}</p>
         </div>
       </div>
-      <button class="contact-remove" (click)="onDeleteContact(contact)">
+      <button class="contact-remove" (click)="removeContact(contact)">
         Remove
       </button>
     </li>
