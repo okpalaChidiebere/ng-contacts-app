@@ -69,6 +69,7 @@ export class ListContactsComponent implements OnInit, OnChanges {
     this.contacts = this.contacts.filter((c) => {
       return c.id !== contact.id;
     });
+    this.showingContacts = this.contacts;
 
     //remove the contact from the server as well
     ContactsAPI.remove(contact);

@@ -1,1 +1,14 @@
-<p>create-contact works!</p>
+<div>
+  <a routerLink="/" class="close-create-contact">Child A</a>
+  <form class="create-contact-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <app-image-input
+      [maxHeight]="64"
+      (fileSelected)="onFileSelected($event)"
+    ></app-image-input>
+    <div class="create-contact-details">
+      <input type="text" formControlName="name" placeholder="Name" />
+      <input type="text" formControlName="handle" placeholder="Handle" />
+      <button type="submit">Add Contact</button>
+    </div>
+  </form>
+</div>
