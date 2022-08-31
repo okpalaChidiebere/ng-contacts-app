@@ -1,53 +1,43 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import * as ContactsAPI from '../../utils/ContactsAPI';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-export type Contact = {
-  id: string;
-  name: string;
-  handle: string;
-  avatarURL: string;
-};
+import { Contact, ContactsService } from '../contacts.service';
 
 @Component({
   selector: 'app-list-contacts',
   templateUrl: './list-contacts.component.html',
   styleUrls: ['./list-contacts.component.css'],
 })
-export class ListContactsComponent implements OnInit, OnChanges {
+export class ListContactsComponent implements OnInit, OnDestroy {
   contacts: Contact[] = [];
   showingContacts: Contact[] = [];
   query: string | null = '';
+  private subscription: Subscription;
 
-  constructor() {}
+  constructor(public contactsService: ContactsService) {}
 
-  //runs after the component mounts
+  //runs after the components mounts
   ngOnInit(): void {
-    /**
-     * fetch the contacts from the remove server after the component mounts
-     * which updates the local state, then updates the UI
-     */
-    ContactsAPI.getAll().then((contacts) => {
-      this.contacts = contacts;
-      this.showingContacts = this.contacts;
-    });
+    this.subscription = this.contactsService
+      .getContacts()
+      .subscribe((contacts) => {
+        this.showingContacts = contacts;
+        this.contacts = contacts;
+      });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    /**
-     * Here we listen for when the `contacts` input(props) from the parent
-     * component changes as of the remove button clicked
-     */
-    this.showingContacts = this.contacts;
-    // console.log(changes);
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe(); //don't forget to unsubscribe to avoid memory leaks
   }
 
   updateQueryResult = () => {
-    //this will update the Ui based on the `query` from data
+    const query = this.query.trim();
+
     this.showingContacts =
-      this.query === ''
+      query === ''
         ? this.contacts
         : this.contacts.filter((c) =>
-            c.name.toLowerCase().includes(this.query.toLowerCase())
+            c.name.toLowerCase().includes(query.toLowerCase())
           );
   };
 
@@ -56,22 +46,7 @@ export class ListContactsComponent implements OnInit, OnChanges {
     this.showingContacts = this.contacts;
   }
 
-  /** The contacts data we want to update lives here.
-   * So it makes sense that the method to modify the contacts list
-   * lives here.
-   *
-   * This method will be passed down to the child component to be
-   * later on invoked when each item is clicked after we bind this
-   * method to the button of each element
-   * */
-  removeContact = (contact: Contact): void => {
-    //assign a new array removing the specific contact passed in
-    this.contacts = this.contacts.filter((c) => {
-      return c.id !== contact.id;
-    });
-    this.showingContacts = this.contacts;
-
-    //remove the contact from the server as well
-    ContactsAPI.remove(contact);
-  };
+  onRemoveContact(contact: Contact) {
+    this.contactsService.removeContact(contact);
+  }
 }

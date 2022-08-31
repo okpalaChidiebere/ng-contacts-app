@@ -30,7 +30,7 @@ I made a contacts app that includes:
 
 ## Lifecycle Events
 
-- Lifecycle events are special methods that each component has that allows us to run custom behavior during certain time of the Component life. See the full list [here](https://angular.io/guide/lifecycle-hooks#sequence-and-frequency-of-all-lifecycle-events)
+- Lifecycle events are special methods that each component has that allows us to run custom behavior during certain time of the Component life. See the full list [here](https://angular.io/guide/lifecycle-hooks#sequence-and-frequency-of-all-lifecycle-events) and [here](https://www.stackchief.com/blog/ngOnInit%20Example%20%7C%20Angular)
 - Why Lifecycle events are important because you know when and where to run asynchronous events like Server fetch, etc
 
 ## Routing and Navigation
@@ -40,6 +40,15 @@ We control the browser navigation using Javascript. We make the browser request 
 - Learn [more](https://angular.io/guide/router) and [here](https://codecraft.tv/courses/angular/routing/overview/)
 
 - On thing to note is that a Screen is still a Component when whenever you navigate to a screen (onInit), it goes through all the angular component life cycle from scratch.
+
+- Using the angular CLI you can add routing to an existing app using `ng generate module app-routing --flat --module=app`
+
+## Angular Services and Observables
+
+- You use **Services** to keep tasks that can be centralized at one place so that you don't have to repeat thesame logic again through out application. Learn more abou Services [here](https://angular.io/tutorial/toh-pt4#why-services). One important thing to know about service is that it follows an hierarchical structure. If you initialize the service class, by adding it to the providers array property, all children of that class will use thesame instance of that class.
+- To generate a Service using the Angular CLI run `ng generate service contacts`. [See](https://angular.io/cli/generate#service)
+- On this Contacts app, We think that the Contacts needs a service because other part of the application like the ListContactsComponent and the CreateContactComponent will need to person tasks on thesame ContactsList.
+- We now made the ContactsList and **observable** because we wanted to listen for changes to the list when the AppComponent make a http request to initialize that list. Observables treats any data you store in it like a stream where parts of your application can subscribe to the stream of data of your observable. Learn more [here](https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/). More example on Angular and Rxjs Observables [here](https://codecraft.tv/courses/angular/reactive-programming-with-rxjs/rxjs-and-angular/)
 
 # Few Aha Moment
 

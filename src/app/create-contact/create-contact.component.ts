@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import * as ContactsAPI from '../../utils/ContactsAPI';
+import { ContactsService } from '../contacts.service';
 
 @Component({
   selector: 'app-create-contact',
@@ -11,7 +11,11 @@ import * as ContactsAPI from '../../utils/ContactsAPI';
 })
 export class CreateContactComponent implements OnInit {
   form: FormGroup;
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private contactsService: ContactsService
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -23,7 +27,7 @@ export class CreateContactComponent implements OnInit {
 
   onSubmit() {
     const { value } = this.form;
-    ContactsAPI.create(value);
+    this.contactsService.createContact(value);
     this.router.navigate(['']);
   }
 
