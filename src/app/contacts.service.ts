@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import * as ContactsAPI from '../utils/ContactsAPI';
+import { ContactsApiService } from 'src/utils/contacts-api.service';
 
 export type Contact = {
   id: string;
@@ -29,7 +29,7 @@ export class ContactsService {
   public readonly contacts: Observable<Array<Contact>> =
     this.contactsEmitter.asObservable();
 
-  constructor() {}
+  constructor(private contactsApi: ContactsApiService) {}
 
   getContacts() {
     return this.contacts;
@@ -48,11 +48,11 @@ export class ContactsService {
     );
 
     //remove the contact from the server as well
-    ContactsAPI.remove(contact);
+    this.contactsApi.remove(contact);
   }
 
   createContact(contact: Contact) {
-    ContactsAPI.create(contact).then((contact) => {
+    this.contactsApi.create(contact).subscribe((contact) => {
       this.contactsEmitter.next(
         this.contactsEmitter.getValue().concat([contact])
       );

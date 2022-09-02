@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as ContactsAPI from '../utils/ContactsAPI';
+import { ContactsApiService } from 'src/utils/contacts-api.service';
 
 import { ContactsService } from './contacts.service';
 
@@ -9,7 +9,10 @@ import { ContactsService } from './contacts.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  constructor(private contactsService: ContactsService) {}
+  constructor(
+    private contactsApi: ContactsApiService,
+    private contactsService: ContactsService
+  ) {}
 
   //runs after the components mounts
   ngOnInit(): void {
@@ -17,8 +20,8 @@ export class AppComponent implements OnInit {
      * fetch the contacts from the remove server after the component mounts
      * which updates the local state, then updates the UI
      */
-    ContactsAPI.getAll().then((contacts) => {
-      this.contactsService.setContacts(contacts);
+    this.contactsApi.getAll().subscribe((response) => {
+      this.contactsService.setContacts(response.contacts);
     });
   }
 }

@@ -50,6 +50,11 @@ We control the browser navigation using Javascript. We make the browser request 
 - On this Contacts app, We think that the Contacts needs a service because other part of the application like the ListContactsComponent and the CreateContactComponent will need to person tasks on thesame ContactsList.
 - We now made the ContactsList and **observable** because we wanted to listen for changes to the list when the AppComponent make a http request to initialize that list. Observables treats any data you store in it like a stream where parts of your application can subscribe to the stream of data of your observable. Learn more [here](https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/). More example on Angular and Rxjs Observables [here](https://codecraft.tv/courses/angular/reactive-programming-with-rxjs/rxjs-and-angular/)
 
-# Few Aha Moment
+## Core HTTP API
+
+- The Http client is a service that you can inject into your classes in Angular to use to easily make http request to your backend server. It uses [Reactive programming](https://rxjs.dev/guide/observable) under the hood
+- Learn [more](https://angular.io/guide/http)
+
+## Few Aha Moment
 
 - The way [styles](https://angular.io/guide/component-styles#using-component-styles) were applied to Components. It was not as free flowing as React in terms of passing style class names from parent to a child component
