@@ -8,6 +8,7 @@ import { ListContactsComponent } from './list-contacts/list-contacts.component';
 import { CreateContactComponent } from './create-contact/create-contact.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ImageInputComponent } from './image-input/image-input.component';
+import { InputTrimDirective } from './list-contacts/input-trim/input-trim.directive';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ImageInputComponent } from './image-input/image-input.component';
     ListContactsComponent,
     CreateContactComponent,
     ImageInputComponent,
+    InputTrimDirective,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@
       placeholder="Search Contacts"
       [(ngModel)]="query"
       (ngModelChange)="updateQueryResult()"
+      appInputTrim
     />
     <a routerLink="/create" class="add-contact">Add Contact</a>
   </div>

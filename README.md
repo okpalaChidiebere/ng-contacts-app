@@ -9,12 +9,12 @@ I made a contacts app that includes:
 - We added a button in the list contacts page(home page) that routes you to the page where you can create a new contact
 - In the create contacts page, you enter the name, handle and upload an avatar. Then you can add the contact to the list of contacts.
 
-## Rendering UI with Angular
+## Rendering UI with Angular and Directives
 
 - You build a large application by building out the smaller Components and putting it all together. Components helps us break the UI into smaller pieces with each pieces having their own responsibilities. This help working on tiny pieces of the app without inadvertently affecting the rest of the app.
 - The create thing about Component is that they encourage us to build application using composition instead of inheritance. Eg If you have built a Native mobile application in Android or iOS it makes extensive use of inheritance where if you want to make a UI View/Component, have to have your class extends the predefined class made for the UI you want. In Angular, instead of extending base components to add more UI or behavior, we compose elements in different ways using [nesting](https://angular.io/guide/component-interaction) and [inputs binding](https://angular.io/api/core/Component#setting-component-inputs). You ultimately want your UI components to be independent, focused, and reusable.
 - Angular using string templates to render the UI. Alternatively, you can pass in html file which is preferred by developers n general because sometimes your template can be large and you can take advantage of your IDE autoCompletes for more pleasant developer experience while coding.
-- When building up ur UI, you will run to cases where you have to conditionally render part of the the UI Components. This is where built in directives in in like `NgFor`, `NgIf`, etc. Learn more [here](https://angular.io/guide/built-in-directives). More video tutorials [here](https://codecraft.tv/courses/angular/built-in-directives/overview/)
+- When building up ur UI, you will run to cases where you have to conditionally render part of the the UI Components. This is where built in **directives** in in like `NgFor`, `NgIf`, etc. Learn more [here](https://angular.io/guide/built-in-directives). More video tutorials [here](https://codecraft.tv/courses/angular/built-in-directives/overview/). You can also build your [custom attribute](https://angular.io/guide/attribute-directives#attribute-directives) or [custom structural](https://angular.io/guide/structural-directives#creating-a-structural-directive) directive
 - To generate a new component using angular CLI run `ng generate component component-name` or `ng g c component-name`
 
 ## Add State To A Component
@@ -25,8 +25,9 @@ I made a contacts app that includes:
 
 ## Controlled Components
 
-- A component controlled is a result of the state (component class properties being defined) being rendered in the UI and then modified after. You controlled components can also be in a form as well. Learn about forms in angular [here](https://angular.io/guide/reactive-forms) and [here](https://blog.angular-university.io/introduction-to-angular-2-forms-template-driven-vs-model-driven/)
-- A component can be controlled using [built-in(]https://angular.io/guide/built-in-directives) or [custom](https://codecraft.tv/courses/angular/custom-directives/creating-a-custom-directive/) directives as well.
+- A component controlled is a result of the state (component class properties being defined) being rendered in the UI and then modified after. Controlled components mostly are in forms by nature in your UI.
+- There two types of form in Angular. [Template forms](https://angular.io/guide/forms) which is more not so much controlled an angular component state and [Reactive forms](<(https://angular.io/guide/reactive-forms)>) which is purely controlled by a component state.
+- [Template vs Reactive forms](https://blog.angular-university.io/introduction-to-angular-2-forms-template-driven-vs-model-driven/)
 
 ## Lifecycle Events
 

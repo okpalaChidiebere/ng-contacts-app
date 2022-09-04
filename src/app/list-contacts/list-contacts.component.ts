@@ -31,7 +31,7 @@ export class ListContactsComponent implements OnInit, OnDestroy {
   }
 
   updateQueryResult = () => {
-    const query = this.query.trim();
+    const query = this.query;
 
     this.showingContacts =
       query === ''
