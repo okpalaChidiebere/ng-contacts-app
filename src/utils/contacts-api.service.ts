@@ -31,14 +31,15 @@ export class ContactsApiService {
   }
 
   remove(contact: Contact) {
-    this.http.delete<{ contact: Contact }>(`${api}/contacts/${contact.id}`, {
-      headers,
-    });
-    // .subscribe({
-    //   next: (response) => console.log(response.contact),
-    //   error: (e) => console.error(e),
-    //   complete: () => console.info('complete'),
-    // });
+    this.http
+      .delete<{ contact: Contact }>(`${api}/contacts/${contact.id}`, {
+        headers,
+      })
+      .subscribe({
+        next: (response) => console.log(response.contact),
+        error: (e) => console.error(e),
+        // complete: () => console.info('complete'), //uncommenting this was causing some bug where the list was not deleting from the server
+      });
   }
 
   create(contact: Contact) {

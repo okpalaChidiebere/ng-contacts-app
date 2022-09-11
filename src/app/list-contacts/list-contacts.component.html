@@ -5,21 +5,26 @@
       type="text"
       placeholder="Search Contacts"
       [(ngModel)]="query"
-      (ngModelChange)="updateQueryResult()"
       appInputTrim
     />
     <a routerLink="/create" class="add-contact">Add Contact</a>
   </div>
   <div
     class="showing-contacts"
-    *ngIf="showingContacts.length !== contacts.length"
+    *ngIf="(contacts | filter: query).length !== contacts.length"
   >
     <span
-      >Now showing {{ showingContacts.length }} of {{ contacts.length }}</span
+      >Now showing {{ (contacts | filter: query).length }} of
+      {{ contacts.length }}</span
     >
     <button (click)="clearQuery()">Show all</button>
   </div>
-  <ol class="contact-list" *ngFor="let contact of showingContacts">
+  <ol
+    class="contact-list"
+    *ngFor="
+      let contact of contactsService.getContacts() | async | filter: query
+    "
+  >
     <li class="contact-list-item">
       <div style="display: flex">
         <div

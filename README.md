@@ -14,8 +14,15 @@ I made a contacts app that includes:
 - You build a large application by building out the smaller Components and putting it all together. Components helps us break the UI into smaller pieces with each pieces having their own responsibilities. This help working on tiny pieces of the app without inadvertently affecting the rest of the app.
 - The create thing about Component is that they encourage us to build application using composition instead of inheritance. Eg If you have built a Native mobile application in Android or iOS it makes extensive use of inheritance where if you want to make a UI View/Component, have to have your class extends the predefined class made for the UI you want. In Angular, instead of extending base components to add more UI or behavior, we compose elements in different ways using [nesting](https://angular.io/guide/component-interaction) and [inputs binding](https://angular.io/api/core/Component#setting-component-inputs). You ultimately want your UI components to be independent, focused, and reusable.
 - Angular using string templates to render the UI. Alternatively, you can pass in html file which is preferred by developers n general because sometimes your template can be large and you can take advantage of your IDE autoCompletes for more pleasant developer experience while coding.
-- When building up ur UI, you will run to cases where you have to conditionally render part of the the UI Components. This is where built in **directives** in in like `NgFor`, `NgIf`, etc. Learn more [here](https://angular.io/guide/built-in-directives). More video tutorials [here](https://codecraft.tv/courses/angular/built-in-directives/overview/). You can also build your [custom attribute](https://angular.io/guide/attribute-directives#attribute-directives) or [custom structural](https://angular.io/guide/structural-directives#creating-a-structural-directive) directive
+- When building up ur UI, you will run to cases where you have to conditionally render part of the the UI Components. This is where built in **directives** in in like `NgFor`, `NgIf`, etc. Learn more [here](https://angular.io/guide/built-in-directives). More video tutorials [here](https://codecraft.tv/courses/angular/built-in-directives/overview/)
 - To generate a new component using angular CLI run `ng generate component component-name` or `ng g c component-name`
+
+## Directives
+
+- Directories in angular are grouped into two.
+- In **attribute directives** you never destroy an element from the DOM. You only can change the values of the properties of the DOM element. On a HTML attribute, Attribute directive are just the regular attributes you define for HTML DOM Element. Learn to build [custom attribute directive](https://angular.io/guide/attribute-directives#attribute-directives)
+- In **structural directives** do thesame as attribute directive but changes the structure of the DOM around this element. eg \*ngIf removing the view container of a DOM from the UI. On a HTML element, structural directive must have a \_ preceding it for desugaring in angular. Learn to build [custom structural directive](https://angular.io/guide/structural-directives#creating-a-structural-directive)
+- Using the CLI, you can create a directive using `ng g d <directiveName>`
 
 ## Add State To A Component
 
@@ -55,6 +62,13 @@ We control the browser navigation using Javascript. We make the browser request 
 
 - The Http client is a service that you can inject into your classes in Angular to use to easily make http request to your backend server. It uses [Reactive programming](https://rxjs.dev/guide/observable) under the hood
 - Learn [more](https://angular.io/guide/http)
+
+## Pipes
+
+- The goal of using pipes is to transform template outputs
+- Checkout all built-in angular pipes [here](https://angular.io/api?type=pipe)
+- For this app, i used pipes for the search contacts feature. Our pipe accepts the search query as an input and returns the transformed list data which is filtered.
+- Learn more about pipes [here](https://angular.io/guide/pipes)
 
 ## Few Aha Moment
 
